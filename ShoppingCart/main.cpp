@@ -19,6 +19,8 @@ main.cpp - main() function
 using namespace std;
 
 int main() {
+    ItemToPurchase items;
+    ItemToPurchase items2;
 
     string userItemInput;
     string userItemInput2;
@@ -31,72 +33,70 @@ int main() {
     string item, price;
     string item2, price2;
 
-    // START of Item 1 input
+
+
     cout << "Item 1" << endl;
-    // Get item name and store in item variable;
+
     cout << "Enter the item name:" << endl;
     // Take user input
     getline(cin,item);
+    cin.clear();
 
-    // Get item price input and store in userPriceInput;
+    // clears buffer
+    cin.ignore (numeric_limits<std::streamsize>::max(), '\n');
+    // magic
+    cin.sync();
+    // stores into setter function
+    items.SetName(userItemInput);
+
     cout << "Enter the item price:" << endl;
 
     cin >> userPriceInput;
 
-    // Get item quantity and store in userItemQuantity;
+    items.SetPrice(userPriceInput);
+
     cout << "Enter the item quantity:" << endl;
     cout << "" << endl;
 
     cin >> userItemQuantity;
-    // Create object 1
-    ItemToPurchase obj1;
-    // Set item price to method using SetName(); function
-    obj1.SetName(item);
-    // Set item quantity using SetPrice(); function
-    obj1.SetPrice(userItemQuantity);
-    // set itemQuantity using SetQuantity() function.
-    obj1.SetQuantity(userItemQuantity);
 
-    // Handle memory buffer commands. Not sure which one does what but should clear memory.
-    cin.clear();
-    cin.ignore (numeric_limits<std::streamsize>::max(), '\n');
+    items.SetQuantity(userItemQuantity);
 
-    // START of second item
+
     cout << "Item 2" << endl;
 
     cout << "Enter the item name:" << endl;
     // Take user input
     getline(cin,item2);
+    cin.clear();
+
+    // clears buffer
+    cin.ignore (numeric_limits<std::streamsize>::max(), '\n');
+    // magic
+    cin.sync();
+    // stores into setter function
+    items2.SetName(item2);
 
     cout << "Enter the item price:" << endl;
 
     cin >> userPriceInput2;
+
+    items2.SetPrice(userPriceInput2);
 
     cout << "Enter the item quantity:" << endl;
     cout << "" << endl;
 
     cin >> userItemQuantity2;
 
-    ItemToPurchase obj2;
+    items2.SetQuantity(userItemQuantity2);
 
-    // Set userItemInput using the SetName() function;
-    obj2.SetName(item2);
 
-    // Set userPriceInput2 using SetPrice() function;
-    obj2.SetPrice(userPriceInput2);
 
-    // Set item quantity using SetQuantity function;
-    obj2.SetQuantity(userItemQuantity2);
-
-    // Calculations
     int priceCalculator = userPriceInput * userItemQuantity;
     int priceCalculator2 = userPriceInput2 * userItemQuantity2;
-
     cout << "TOTAL COST" << endl;
-    cout << obj1.GetName() << " " << obj1.GetQuantity() << " @ " << "$" << userPriceInput << " = " << "$" << priceCalculator << endl;
-    cout << obj2.GetName() << " " << obj2.GetQuantity() << " @ " << "$" << obj2.GetPrice()  << " = " << "$" << priceCalculator2 << endl;
-
-    cout << "" << endl;
+    cout << item << " " << userItemQuantity << " @ " << "$" << userPriceInput << " = " << "$" << priceCalculator << endl;
+    cout << item2 << " " << userItemQuantity2 << " @ " << " $" << userPriceInput2 << " = " << " $" << priceCalculator2 << endl;
 
     int total = priceCalculator + priceCalculator2;
     cout << "Total: $" << total << endl;
